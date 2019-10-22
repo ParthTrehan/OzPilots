@@ -105,7 +105,7 @@ $("#email-form").on("submit", function (e) {
     $.ajax({
         "async": true,
         crossDomain: true,
-        "url": "https://audb01c77f3e83a.ap1.hana.ondemand.com/pilot/xsodata/pilot.xsodata/Enquiry",
+        "url": proxy+ "https://audb01c77f3e83a.ap1.hana.ondemand.com/pilot/xsodata/pilot.xsodata/Enquiry",
         "method": "POST",
         "headers": {
             "Accept": "application/json",
@@ -132,3 +132,14 @@ $("#email-form").on("submit", function (e) {
         console.log(response);
     });
 });
+
+function sendEmail() {
+    alert("hello")
+    var addresses = "";//between the speech mark goes the receptient. Seperate addresses with a ;
+    var body = ""//write the message text between the speech marks or put a variable in the place of the speech marks
+    var subject = ""//between the speech marks goes the subject of the message
+    var href = "mailto:" + addresses + "?"
+        + "subject=" + subject + "&"
+        + "body=" + body;
+    window.open('mailto:test@example.com?subject=subject&body=body');
+}
