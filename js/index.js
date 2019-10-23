@@ -132,8 +132,8 @@ function sendEnquiry() {
 
 }
 $("#email-form").on("submit", function (e) {
-
     e.preventDefault();
+    sendEnquiry();
 
 });
 
