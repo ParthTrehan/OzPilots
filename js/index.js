@@ -1,5 +1,5 @@
 $(document).ready(function () {
-    $(".full-form").hide()
+    // $(".full-form").hide()
     $("input[id='CUSTOMER.CUSTOMERID']").focus(function () {
         $(".full-form").slideDown();
     });
@@ -97,15 +97,13 @@ var modal = new tingle.modal({
     }
 });
 
-
-$("#email-form").on("submit", function (e) {
-    e.preventDefault();
+function sendEnquiry() {
     // However to make it work, we are going to use the cors-anywhere free service to bypass this
     var proxy = 'https://cors-anywhere.herokuapp.com/';
     $.ajax({
         "async": true,
         crossDomain: true,
-        "url": proxy+ "https://audb01c77f3e83a.ap1.hana.ondemand.com/pilot/xsodata/pilot.xsodata/Enquiry",
+        "url": proxy + "https://audb01c77f3e83a.ap1.hana.ondemand.com/pilot/xsodata/pilot.xsodata/Enquiry",
         "method": "POST",
         "headers": {
             "Accept": "application/json",
@@ -131,6 +129,12 @@ $("#email-form").on("submit", function (e) {
     }).done(function (response) {
         console.log(response);
     });
+
+}
+$("#email-form").on("submit", function (e) {
+
+    e.preventDefault();
+
 });
 
 function sendEmail() {
