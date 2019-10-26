@@ -1,12 +1,13 @@
-$(document).ready(function () {
-    // $(".full-form").hide()
-    $("input[id='CUSTOMER.CUSTOMERID']").focus(function () {
-        $(".full-form").slideDown();
-    });
-    $("#bookButton").focus(function () {
-        $(".full-form").slideDown();
-    });
-});
+
+var geocoder = new google.maps.Geocoder();
+google.maps.event.addDomListener(window, 'load', initialize);
+headers = {
+    "Accept": "application/json",
+    "Content-Type": "application/json",
+    "Authorization": "Basic UElMT1REQlVTUjAxOlBpbG90c2NwQGRidXNyMDE=",
+    "cache-control": "no-cache",
+    "Access-Control-Allow-Origin": "*"
+}
 
 function initialize() {
     var input1 = document.getElementById('PICKUP.searchTextField');
@@ -14,10 +15,6 @@ function initialize() {
     new google.maps.places.Autocomplete(input1);
     new google.maps.places.Autocomplete(input2);
 }
-
-var geocoder = new google.maps.Geocoder();
-google.maps.event.addDomListener(window, 'load', initialize);
-
 
 function fetchAddress(addressType) {
     var address = document.getElementById(addressType + '.searchTextField').value;
@@ -105,17 +102,10 @@ function sendEnquiry() {
         crossDomain: true,
         "url": proxy + "https://audb01c77f3e83a.ap1.hana.ondemand.com/pilot/xsodata/pilot.xsodata/Enquiry",
         "method": "POST",
-        "headers": {
-            "Accept": "application/json",
-            "Content-Type": "application/json",
-            "Authorization": "Basic UElMT1REQlVTUjAxOlBpbG90c2NwQGRidXNyMDE=",
-            "cache-control": "no-cache",
-            "Access-Control-Allow-Origin": "*"
-        },
+        "headers": headers,
         success: function (msg) {
             console.log(msg);
             // alert("Your enquiry has been recieved and your customer id is " + msg.d.JOBHID)
-
             // set content
             modal.setContent('<h4>Your enquiry has been submitted.</h4><p>Your JOB-ID is ' + msg.d.JOBHID + ' </p>');
             //open modal
@@ -133,17 +123,40 @@ function sendEnquiry() {
 }
 $("#email-form").on("submit", function (e) {
     e.preventDefault();
-    sendEnquiry();
-
+    customerID = document.getElementById('CUSTOMER.CUSTOMERID').value
+    var proxy = 'https://cors-anywhere.herokuapp.com/';
+    errFlag = false
+    console.log("https://audb01c77f3e83a.ap1.hana.ondemand.com/pilot/xsodata/pilot.xsodata/Enquiry('" + customerID + "')")
+    $.ajax({
+        "async": false,
+        crossDomain: true,
+        "url": proxy + "https://audb01c77f3e83a.ap1.hana.ondemand.com/pilot/xsodata/pilot.xsodata/Enquiry('" + customerID + "')",
+        "method": "GET",
+        "headers": headers,
+        error: function (err) {
+            alert("error")
+            console.log("error")
+            errFlag = true
+            // set content
+            modal.setContent('<h4>Please enter a valid customer ID. </h4><p> Error Response - ' + err.responseJSON.error.message.value + ' </p>');
+            //open modal
+            modal.open();
+        },
+        "processData": false
+    }).done(function (response) {
+        console.log(response);
+    });
+    if (!errFlag) {
+        sendEnquiry();
+    }
 });
 
 function sendEmail() {
-    alert("hello")
-    var addresses = "";//between the speech mark goes the receptient. Seperate addresses with a ;
-    var body = ""//write the message text between the speech marks or put a variable in the place of the speech marks
+    var addresses = "";
+    var body = "I have an enquiry regarding availability of cars"
     var subject = ""//between the speech marks goes the subject of the message
     var href = "mailto:" + addresses + "?"
         + "subject=" + subject + "&"
         + "body=" + body;
-    window.open('mailto:test@example.com?subject=subject&body=body');
+    window.open(href);
 }
