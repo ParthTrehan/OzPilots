@@ -72,34 +72,34 @@
 					<form class="form" role="form" id="email-form" name="email-form" autocomplete="off">
 						<div class="from-group">
 							<input type="number" class="form-control txt-field" id="CUSTOMER.CUSTOMERID"
-								placeholder="Customer ID" name="CUSTOMER.CUSTOMERID"
-								onblur="this.placeholder = 'Customer ID'" required="">
+								placeholder="Customer ID*" name="CUSTOMER.CUSTOMERID"
+								onblur="this.placeholder = 'Customer ID'" required="" min="999999999" max="9999999999">
 						</div>
 						<div class="full-form">
 							<div class="from-group">
 								<div class="col-md-12 row no-padding no-margin">
 									<input class="form-control txt-field col-md-6" type="text" id="NAME.FIRST"
-										name="NAME.FIRST" placeholder="First Name" required="">
+										name="NAME.FIRST" placeholder="First Name*" required="">
 									<input class="form-control txt-field col-md-6" type="text" id="NAME.LAST"
-										name="NAME.LAST" placeholder="Last Name" required="">
+										name="NAME.LAST" placeholder="Last Name*" required="">
 								</div>
 							</div>
 							<div class="from-group">
 								<input class="form-control txt-field" type="tel" id="LLPHONE" name="LLPHONE"
-									pattern="[0-9]{10}" placeholder="Contact number" required="">
+									pattern="[0-9]{10}" placeholder="Contact number*" required="">
 								<input class="form-control txt-field" type="EMAIL" id="EMAIL" name="EMAIL"
-									pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" placeholder="Email address"
+									pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" placeholder="Email address*"
 									required="">
 							</div>
 							<div class="from-group">
 								<input type="number" class="form-control txt-field" id="VEHICLE_COUNT"
-									placeholder="Number of Vehicles" name="VEHICLE_COUNT"
-									onblur="this.placeholder = 'Number of Vehicles'" required="" min="1" max="10">
+									placeholder="Number of Vehicles*" name="VEHICLE_COUNT"
+									onblur="this.placeholder = 'Number of Vehicles*'" required="" min="1" max="10">
 							</div>
 							<div class="from-group">
 								<input type="text" class="form-control txt-field" id="PICKUP.searchTextField"
-									placeholder="Enter pick up address" name="PICKUP.LOCATION"
-									onblur="this.placeholder = 'Enter pick up address'"
+									placeholder="Enter pick up address*" name="PICKUP.LOCATION"
+									onblur="this.placeholder = 'Enter pick up address*'"
 									onfocusout="fetchAddress('PICKUP')" required="">
 								<input type="hidden" name="PICKUP.STREET" id="PICKUP.STREET">
 								<input type="hidden" name="PICKUP.CITY" id="PICKUP.CITY">
@@ -127,8 +127,8 @@
 							</div> -->
 							<div class="from-group">
 								<input type="text" class="form-control txt-field" id="DROPOFF.searchTextField"
-									placeholder="Enter drop off address" name="DROPOFF.LOCATION"
-									onblur="this.placeholder = 'Enter drop off address'"
+									placeholder="Enter drop off address*" name="DROPOFF.LOCATION"
+									onblur="this.placeholder = 'Enter drop off address*'"
 									onfocusout="fetchAddress('DROPOFF')" required="">
 								<input type="hidden" name="DROPOFF.STREET" id="DROPOFF.STREET">
 								<input type="hidden" name="DROPOFF.CITY" id="DROPOFF.CITY">
@@ -149,8 +149,8 @@
 									placeholder="Upload Permit">
 							</div>
 							<div class="from-group">
-								<textarea class="form-control txt-field single-textarea" placeholder="Message"
-									onfocus="this.placeholder = ''" onblur="this.placeholder = 'Message'" required=""
+								<textarea class="form-control txt-field single-textarea" placeholder="Message*"
+									onfocus="this.placeholder = ''" onblur="this.placeholder = 'Message*'" required=""
 									autocomplete="off" spellcheck="false"></textarea>
 							</div>
 							<div class="form-group row">
