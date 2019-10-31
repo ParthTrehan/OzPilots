@@ -77,16 +77,24 @@
 						</div>
 						<div class="full-form">
 							<div class="from-group">
-								<input class="form-control txt-field" type="text" name="name" placeholder="Name" required="">
-								<input class="form-control txt-field" type="tel" name="Contact" pattern="[0-9]{10}"
-									placeholder="Contact number" required="">
-								<input class="form-control txt-field" type="email" name="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
-									placeholder="Email address" required="">
+								<div class="col-md-12 row no-padding no-margin">
+									<input class="form-control txt-field col-md-6" type="text" id="NAME.FIRST"
+										name="NAME.FIRST" placeholder="First Name" required="">
+									<input class="form-control txt-field col-md-6" type="text" id="NAME.LAST"
+										name="NAME.LAST" placeholder="Last Name" required="">
+								</div>
 							</div>
 							<div class="from-group">
-								<input type="text" class="form-control txt-field" id="VEHICLE_COUNT"
+								<input class="form-control txt-field" type="tel" id="LLPHONE" name="LLPHONE"
+									pattern="[0-9]{10}" placeholder="Contact number" required="">
+								<input class="form-control txt-field" type="EMAIL" id="EMAIL" name="EMAIL"
+									pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" placeholder="Email address"
+									required="">
+							</div>
+							<div class="from-group">
+								<input type="number" class="form-control txt-field" id="VEHICLE_COUNT"
 									placeholder="Number of Vehicles" name="VEHICLE_COUNT"
-									onblur="this.placeholder = 'Number of Vehicles'" required="">
+									onblur="this.placeholder = 'Number of Vehicles'" required="" min="1" max="10">
 							</div>
 							<div class="from-group">
 								<input type="text" class="form-control txt-field" id="PICKUP.searchTextField"
@@ -102,6 +110,22 @@
 								<input type="hidden" name="PICKUP.LONGITUDE" id="PICKUP.LONGITUDE">
 							</div>
 							<div class="from-group">
+								<input type="datetime-local" class="form-control txt-field" id="PICKUP.DATETIME"
+									placeholder="Enter pick up date and time" title="Enter pick up date and time"
+									name="PICKUP.DATETIME" onblur="this.placeholder = 'Enter pick up date and time'"
+									required="">
+							</div>
+							<!-- <div class="from-group">
+								<div class="col-md-12 row no-padding no-margin">
+									<input type="datetime-local" class="form-control txt-field col-md-6"
+										id="PICKUP.DATE" placeholder="Enter pick up date " title="Enter pick up date"
+										name="PICKUP.DATE" onblur="this.placeholder = 'Enter pick up date'" required="">
+									<input type="time" class="form-control txt-field col-md-6" id="PICKUP.TIME"
+										placeholder="Enter pick up time" title="Enter pick up time" name="PICKUP.TIME"
+										onblur="this.placeholder = 'Enter pick up time'" required="">
+								</div>
+							</div> -->
+							<div class="from-group">
 								<input type="text" class="form-control txt-field" id="DROPOFF.searchTextField"
 									placeholder="Enter drop off address" name="DROPOFF.LOCATION"
 									onblur="this.placeholder = 'Enter drop off address'"
@@ -113,6 +137,12 @@
 								<input type="hidden" name="DROPOFF.STATE" id="DROPOFF.STATE">
 								<input type="hidden" name="DROPOFF.LATITUDE" id="DROPOFF.LATITUDE">
 								<input type="hidden" name="DROPOFF.LONGITUDE" id="DROPOFF.LONGITUDE">
+							</div>
+							<div class="from-group">
+								<input type="datetime-local" class="form-control txt-field" id="DROPOFF.DATETIME"
+									placeholder="Enter drop off date and time" title="Enter drop off date and time"
+									name="DROPOFF.DATETIME" onblur="this.placeholder = 'Enter drop off date and time'"
+									required="">
 							</div>
 							<div class="from-group">
 								<input class="form-control txt-field" type="file" id="Permit" name="Permit"

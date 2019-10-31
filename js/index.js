@@ -1,3 +1,6 @@
+$(function () {
+    $('#PICKUP.DATETIME').datepicker();
+});
 
 var geocoder = new google.maps.Geocoder();
 google.maps.event.addDomListener(window, 'load', initialize);
@@ -18,7 +21,7 @@ function initialize() {
 
 function fetchAddress(addressType) {
     var address = document.getElementById(addressType + '.searchTextField').value;
-    if (address != "") {
+    if (address != "" && address.length > 5) {
         geocoder.geocode({ 'address': address }, function (results, status) {
             if (status === 'OK') {
                 console.log(results[0])
@@ -52,7 +55,8 @@ function fetchAddress(addressType) {
             }
         });
     } else {
-
+        alert("please enter valid address with street")
+        document.getElementById(addressType + '.searchTextField').value = ""
     }
 }
 function ConvertFormToJSON(form) {
@@ -66,9 +70,8 @@ function ConvertFormToJSON(form) {
     json.JOBHID = ""
     delete json["DROPOFF.LOCATION"]
     delete json["PICKUP.LOCATION"]
-    delete json["name"]
-    delete json["email"]
-    delete json["Contact"]
+    delete json["PICKUP.DATETIME"]
+    delete json["DROPOFF.DATETIME"]
     console.log(json);
     console.log(JSON.stringify(json));
     return JSON.stringify(json);
