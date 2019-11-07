@@ -1,5 +1,46 @@
-$(function () {
-    $('#PICKUP.DATETIME').datepicker();
+$(document).ready(function () {
+    //DOM manipulation code
+    pickTime = document.getElementById('PICKUP.TIME');
+    dropTime = document.getElementById('DROPOFF.TIME');
+    pickDate = document.getElementById('PICKUP.DATE');
+    dropDate = document.getElementById('DROPOFF.DATE');
+    $(pickTime).timepicker({
+        change: function (e) {
+
+        },
+        close: function (e) {
+
+        }
+    });
+    $(dropTime).timepicker({
+        change: function (e) {
+
+        },
+        close: function (e) {
+
+        }
+    });
+    $(pickDate).datepicker({
+        footer: true, modal: true,
+        change: function (e) {
+
+        }
+    });
+    $(dropDate).datepicker({
+        footer: true, modal: true,
+        change: function (e) {
+
+        }
+    });
+    $(pickTime).removeClass("gj-textbox-md")
+    $(dropTime).removeClass("gj-textbox-md")
+    $(pickDate).removeClass("gj-textbox-md")
+    $(dropDate).removeClass("gj-textbox-md")
+    $('.gj-icon').each(function (i, obj) {
+        $(this).addClass("m-2")
+    });
+
+
 });
 
 var geocoder = new google.maps.Geocoder();
@@ -45,8 +86,7 @@ function fetchAddress(addressType) {
                     document.getElementById(addressType + '.POSTALCODE').value = postalCode
                     document.getElementById(addressType + '.COUNTRY').value = country
                     document.getElementById(addressType + '.STATE').value = state
-                }
-                else {
+                } else {
                     alert("please enter address with street")
                     document.getElementById(addressType + '.searchTextField').value = ""
                 }
@@ -59,6 +99,7 @@ function fetchAddress(addressType) {
         document.getElementById(addressType + '.searchTextField').value = ""
     }
 }
+
 function ConvertFormToJSON(form) {
     var array = jQuery(form).serializeArray();
     var json = {};
@@ -70,8 +111,10 @@ function ConvertFormToJSON(form) {
     json.JOBHID = ""
     delete json["DROPOFF.LOCATION"]
     delete json["PICKUP.LOCATION"]
-    delete json["PICKUP.DATETIME"]
-    delete json["DROPOFF.DATETIME"]
+    delete json["PICKUP.DATE"]
+    delete json["DROPOFF.DATE"]
+    delete json["PICKUP.TIME"]
+    delete json["DROPOFF.TIME"]
     console.log(json);
     console.log(JSON.stringify(json));
     return JSON.stringify(json);
@@ -155,11 +198,11 @@ $("#email-form").on("submit", function (e) {
 });
 
 function sendEmail() {
-    var addresses = "";
+    var addresses = "sales@ozpilots.com.au";
     var body = "I have an enquiry regarding availability of cars"
-    var subject = ""//between the speech marks goes the subject of the message
-    var href = "mailto:" + addresses + "?"
-        + "subject=" + subject + "&"
-        + "body=" + body;
+    var subject = "Availability of Cars"
+    var href = "mailto:" + addresses + "?" +
+        "subject=" + subject + "&" +
+        "body=" + body;
     window.open(href);
 }
