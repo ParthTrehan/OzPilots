@@ -74,14 +74,16 @@
                     <button id="bookButton" class="primary-btn text-uppercase">Book Vehicles Now</a>
                 </div>
                 <div class="col-lg-5  col-md-6 header-right">
+                    <div id="cover"></div>
                     <h4 class="text-white pb-30">Book Your Vehicles Today!</h4>
                     <form class="form" role="form" id="email-form" name="email-form" autocomplete="off">
-                        <div class="from-group">
-                            <input type="number" class="form-control txt-field" id="CUSTOMER.CUSTOMERID"
-                                placeholder="Customer ID*" name="CUSTOMER.CUSTOMERID"
-                                onblur="this.placeholder = 'Customer ID'" required="" min="999999999" max="9999999999">
-                        </div>
                         <div class="full-form">
+                            <div class="from-group">
+                                <input type="number" class="form-control txt-field" id="CUSTOMER.CUSTOMERID"
+                                    placeholder="Customer ID*" name="CUSTOMER.CUSTOMERID"
+                                    onblur="this.placeholder = 'Customer ID*'" required="" min="999999999"
+                                    max="9999999999">
+                            </div>
                             <div class="from-group">
                                 <div class="col-md-12 row no-padding no-margin">
                                     <div class="col-md-6 no-padding no-margin">
@@ -111,7 +113,7 @@
                                     <input type="text" class="form-control txt-field" id="PICKUP.searchTextField"
                                         placeholder="Enter pick up address*" name="PICKUP.LOCATION"
                                         onblur="this.placeholder = 'Enter pick up address*'"
-                                        onfocusout="fetchAddress('PICKUP')" required="">
+                                        onfocusout="fetchAddress('PICKUP')" required>
                                     <input type="hidden" name="PICKUP.STREET" id="PICKUP.STREET">
                                     <input type="hidden" name="PICKUP.CITY" id="PICKUP.CITY">
                                     <input type="hidden" name="PICKUP.POSTALCODE" id="PICKUP.POSTALCODE">
@@ -139,7 +141,7 @@
                                     <input type="text" class="form-control txt-field" id="DROPOFF.searchTextField"
                                         placeholder="Enter drop off address*" name="DROPOFF.LOCATION"
                                         onblur="this.placeholder = 'Enter drop off address*'"
-                                        onfocusout="fetchAddress('DROPOFF')" required="">
+                                        onfocusout="fetchAddress('DROPOFF')" required>
                                     <input type="hidden" name="DROPOFF.STREET" id="DROPOFF.STREET">
                                     <input type="hidden" name="DROPOFF.CITY" id="DROPOFF.CITY">
                                     <input type="hidden" name="DROPOFF.POSTALCODE" id="DROPOFF.POSTALCODE">
@@ -168,8 +170,8 @@
                                     placeholder="Upload Permit">
                             </div>
                             <div class="from-group">
-                                <textarea class="form-control txt-field single-textarea" placeholder="Message*"
-                                    onfocus="this.placeholder = ''" onblur="this.placeholder = 'Message*'" required=""
+                                <textarea class="form-control txt-field single-textarea" placeholder="Message"
+                                    onfocus="this.placeholder = ''" onblur="this.placeholder = 'Message'"
                                     autocomplete="off" spellcheck="false"></textarea>
                             </div>
                             <div class="form-group row">

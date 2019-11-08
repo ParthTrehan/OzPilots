@@ -6,30 +6,24 @@ $(document).ready(function () {
     dropDate = document.getElementById('DROPOFF.DATE');
     $(pickTime).timepicker({
         change: function (e) {
-
         },
         close: function (e) {
-
         }
     });
     $(dropTime).timepicker({
         change: function (e) {
-
         },
         close: function (e) {
-
         }
     });
     $(pickDate).datepicker({
         footer: true, modal: true,
         change: function (e) {
-
         }
     });
     $(dropDate).datepicker({
         footer: true, modal: true,
         change: function (e) {
-
         }
     });
     $(pickTime).removeClass("gj-textbox-md")
@@ -39,8 +33,6 @@ $(document).ready(function () {
     $('.gj-icon').each(function (i, obj) {
         $(this).addClass("m-2")
     });
-
-
 });
 
 var geocoder = new google.maps.Geocoder();
@@ -59,6 +51,7 @@ function initialize() {
     new google.maps.places.Autocomplete(input1);
     new google.maps.places.Autocomplete(input2);
 }
+
 
 function fetchAddress(addressType) {
     var address = document.getElementById(addressType + '.searchTextField').value;
