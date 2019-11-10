@@ -40,7 +40,7 @@ google.maps.event.addDomListener(window, 'load', initialize);
 headers = {
     "Accept": "application/json",
     "Content-Type": "application/json",
-    "Authorization": "Basic UElMT1REQlVTUjAxOlBpbG90c2NwQGRidXNyMDE=",
+    "Authorization": "Basic U1lTVEVNOklua2l0c2NwQGF1ZGIwMQ==",
     "cache-control": "no-cache",
     "Access-Control-Allow-Origin": "*"
 }
