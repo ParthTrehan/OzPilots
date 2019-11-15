@@ -1,37 +1,41 @@
+; (function ($) {
+    $.fn.datepicker.language['en'] = {
+        days: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
+        daysShort: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
+        daysMin: ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'],
+        months: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
+        monthsShort: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+        today: 'Today',
+        clear: 'Clear',
+        dateFormat: 'mm/dd/yyyy',
+        timeFormat: 'hh:ii aa',
+        firstDay: 0
+    };
+})(jQuery);
+
+$(document).ready(function () {
+    $(document).ajaxStart(function () {
+        $("#submitText").hide();
+        $("#loader").show();
+    }).ajaxStop(function () {
+        $("#submitText").show();
+        $("#loader").hide();
+    });
+});
+
 $(document).ready(function () {
     //DOM manipulation code
-    pickTime = document.getElementById('PICKUP.TIME');
-    dropTime = document.getElementById('DROPOFF.TIME');
+
     pickDate = document.getElementById('PICKUP.DATE');
     dropDate = document.getElementById('DROPOFF.DATE');
-    $(pickTime).timepicker({
-        change: function (e) {
-        },
-        close: function (e) {
-        }
-    });
-    $(dropTime).timepicker({
-        change: function (e) {
-        },
-        close: function (e) {
-        }
-    });
+
     $(pickDate).datepicker({
-        footer: true, modal: true,
-        change: function (e) {
-        }
+        language: 'en',
+        minDate: new Date() // Now can select only dates, which goes after today
     });
     $(dropDate).datepicker({
-        footer: true, modal: true,
-        change: function (e) {
-        }
-    });
-    $(pickTime).removeClass("gj-textbox-md")
-    $(dropTime).removeClass("gj-textbox-md")
-    $(pickDate).removeClass("gj-textbox-md")
-    $(dropDate).removeClass("gj-textbox-md")
-    $('.gj-icon').each(function (i, obj) {
-        $(this).addClass("m-2")
+        language: 'en',
+        minDate: new Date() // Now can select only dates, which goes after today
     });
 });
 
@@ -102,12 +106,16 @@ function ConvertFormToJSON(form) {
     var date = "/Date(" + Date.now() + ")/";
     json["HISTORY.CREATEDAT"] = date;
     json.JOBHID = ""
+
+    var pickDateTime = new Date(document.getElementById('PICKUP.DATE').value);
+    var dropDateTime = new Date(document.getElementById('DROPOFF.DATE').value);
+
+    json["PICKUP.DATETIME"] = "/Date(" + pickDateTime.getTime() + ")/";
+    json["DROPOFF.DATETIME"] = "/Date(" + dropDateTime.getTime() + ")/";
     delete json["DROPOFF.LOCATION"]
     delete json["PICKUP.LOCATION"]
     delete json["PICKUP.DATE"]
     delete json["DROPOFF.DATE"]
-    delete json["PICKUP.TIME"]
-    delete json["DROPOFF.TIME"]
     console.log(json);
     console.log(JSON.stringify(json));
     return JSON.stringify(json);
@@ -139,7 +147,7 @@ function sendEnquiry() {
     $.ajax({
         "async": true,
         crossDomain: true,
-        "url": proxy + "https://audb01c77f3e83a.ap1.hana.ondemand.com/pilot/xsodata/pilot.xsodata/Enquiry",
+        "url": "https://audb01c77f3e83a.ap1.hana.ondemand.com/pilot/xsodata/pilot.xsodata/Enquiry",
         "method": "POST",
         "headers": headers,
         success: function (msg) {
@@ -169,11 +177,10 @@ $("#email-form").on("submit", function (e) {
     $.ajax({
         "async": false,
         crossDomain: true,
-        "url": proxy + "https://audb01c77f3e83a.ap1.hana.ondemand.com/pilot/xsodata/pilot.xsodata/Enquiry('" + customerID + "')",
+        "url": "https://audb01c77f3e83a.ap1.hana.ondemand.com/pilot/xsodata/pilot.xsodata/Enquiry('" + customerID + "')",
         "method": "GET",
         "headers": headers,
         error: function (err) {
-            alert("error")
             console.log("error")
             errFlag = true
             // set content
