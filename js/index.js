@@ -147,7 +147,7 @@ function sendEnquiry() {
     $.ajax({
         "async": true,
         crossDomain: true,
-        "url": "https://audb01c77f3e83a.ap1.hana.ondemand.com/pilot/xsodata/pilot.xsodata/Enquiry",
+        "url": proxy + "https://audb01c77f3e83a.ap1.hana.ondemand.com/pilot/xsodata/pilot.xsodata/Enquiry",
         "method": "POST",
         "headers": headers,
         success: function (msg) {
@@ -177,7 +177,7 @@ $("#email-form").on("submit", function (e) {
     $.ajax({
         "async": false,
         crossDomain: true,
-        "url": "https://audb01c77f3e83a.ap1.hana.ondemand.com/pilot/xsodata/pilot.xsodata/Enquiry('" + customerID + "')",
+        "url": proxy + "https://audb01c77f3e83a.ap1.hana.ondemand.com/pilot/xsodata/pilot.xsodata/Enquiry('" + customerID + "')",
         "method": "GET",
         "headers": headers,
         error: function (err) {
