@@ -105,6 +105,7 @@ function ConvertFormToJSON(form) {
     });
     var date = "/Date(" + Date.now() + ")/";
     json["HISTORY.CREATEDAT"] = date;
+    json["STATUS.STATUS"] = "01"
     json.JOBHID = ""
 
     var pickDateTime = new Date(document.getElementById('PICKUP.DATE').value);
