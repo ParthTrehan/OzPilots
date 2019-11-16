@@ -2267,12 +2267,12 @@ body.mobile-nav-active #mobile-nav-toggle {
 }
 
 .banner-area {
-  background: url(../img/header-bg.jpg) center;
+  background: url(../img/bg2.jpg) center;
   background-size: cover;
 }
 
 .banner-area .overlay-bg {
-  background-color: rgba(0, 0, 0, 0.8);
+  background-color: rgba(0, 0, 0, 0.6);
 }
 
 @media (max-width: 767px) {
@@ -2347,7 +2347,8 @@ body.mobile-nav-active #mobile-nav-toggle {
 .header-right {
   background-color: rgba(32, 46, 69, 0.4);
   border: 1px solid #4b5263;
-  padding: 50px;
+  padding: 40px;
+  margin-top: 1rem;
 }
 
 @media (max-width: 413px) {

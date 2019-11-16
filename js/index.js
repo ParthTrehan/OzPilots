@@ -173,11 +173,11 @@ $("#email-form").on("submit", function (e) {
     customerID = document.getElementById('CUSTOMER.CUSTOMERID').value
     var proxy = 'https://cors-anywhere.herokuapp.com/';
     errFlag = false
-    console.log("https://audb01c77f3e83a.ap1.hana.ondemand.com/pilot/xsodata/pilot.xsodata/Enquiry('" + customerID + "')")
+    console.log("https://audb01c77f3e83a.ap1.hana.ondemand.com/pilot/xsodata/pilot.xsodata/Customer('" + customerID + "')")
     $.ajax({
         "async": false,
         crossDomain: true,
-        "url": proxy + "https://audb01c77f3e83a.ap1.hana.ondemand.com/pilot/xsodata/pilot.xsodata/Enquiry('" + customerID + "')",
+        "url": proxy + "https://audb01c77f3e83a.ap1.hana.ondemand.com/pilot/xsodata/pilot.xsodata/Customer('" + customerID + "')",
         "method": "GET",
         "headers": headers,
         error: function (err) {
