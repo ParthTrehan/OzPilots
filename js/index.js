@@ -165,6 +165,7 @@ function sendEnquiry() {
         "data": ConvertFormToJSON($("#email-form"))
     }).done(function (response) {
         console.log(response);
+        document.getElementById("email-form").reset();
     });
 
 }
