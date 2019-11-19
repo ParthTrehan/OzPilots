@@ -84,7 +84,7 @@ function fetchAddress(addressType) {
                     document.getElementById(addressType + '.COUNTRY').value = country
                     document.getElementById(addressType + '.STATE').value = state
                 } else {
-                    alert("please enter address with street")
+                    alert("please enter address with Street and Street Number")
                     document.getElementById(addressType + '.searchTextField').value = ""
                 }
             } else {
