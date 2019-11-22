@@ -1923,6 +1923,7 @@ h1, h2, h3, h4, h5, h6 {
 
 #header #logo img {
   padding: 0;
+  height: 5rem;
   margin: 0;
 }
 

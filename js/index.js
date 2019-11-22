@@ -105,6 +105,7 @@ function ConvertFormToJSON(form) {
     });
     var date = "/Date(" + Date.now() + ")/";
     json["HISTORY.CREATEDAT"] = date;
+    json["HISTORY.CREATEDBY"] = "Website";
     json["STATUS.STATUS"] = "01"
     json.JOBHID = ""
 
