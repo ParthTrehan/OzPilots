@@ -44,7 +44,7 @@ google.maps.event.addDomListener(window, 'load', initialize);
 headers = {
     "Accept": "application/json",
     "Content-Type": "application/json",
-    "Authorization": "Basic U1lTVEVNOklua2l0c2NwQGF1ZGIwMQ==",
+    "Authorization": "Basic U1lTVEVNOklua2l0c2NwQGF1ZGIwNA==",
     "cache-control": "no-cache",
     "Access-Control-Allow-Origin": "*"
 }
@@ -96,6 +96,25 @@ function fetchAddress(addressType) {
         document.getElementById(addressType + '.searchTextField').value = ""
     }
 }
+
+function getDataForAttachment(enquiryId) {
+    var fd = new FormData(); 
+    var files = $('#Permit')[0].files[0]; 
+    fd.append('file', files); 
+    var json = {};
+    var date = "/Date(" + Date.now() + ")/";
+    json["DOCID"] = ""
+    json["LINKID"] = enquiryId
+    json["DOCUCAT_CATEGORY"] = "A1"
+    json["TYPE"] = files.type
+    json["TITLE"] = "Document for " + enquiryId
+    json["CREATEDAT"] = date
+    json["DESCRIPTION"] = "Document Description"
+    json["SIZE"] = files.size.toString()
+    console.log(json);
+    return JSON.stringify(json)
+}
+
 
 function ConvertFormToJSON(form) {
     var array = jQuery(form).serializeArray();
