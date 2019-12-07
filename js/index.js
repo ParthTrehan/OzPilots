@@ -13,6 +13,29 @@
     };
 })(jQuery);
 
+// Check for the File API support.
+if (window.File && window.FileReader && window.FileList && window.Blob) {
+    document.getElementById('Permit').addEventListener('change', handleFileSelect, false);
+} else {
+    alert('The File APIs are not fully supported in this browser.');
+}
+function handleFileSelect(evt) {
+    var f = evt.target.files[0]; // FileList object
+    var reader = new FileReader();
+    // Closure to capture the file information.
+    reader.onload = (function (theFile) {
+        return function (e) {
+            var binaryData = e.target.result;
+            //Converting Binary Data to base 64
+            var base64String = window.btoa(binaryData);
+            //showing file converted to base64
+            document.getElementById('fileContent').value = base64String;
+        };
+    })(f);
+    // Read in the image file as a data URL.
+    reader.readAsBinaryString(f);
+}
+
 $(document).ready(function () {
     $(document).ajaxStart(function () {
         $("#submitText").hide();
@@ -97,22 +120,18 @@ function fetchAddress(addressType) {
     }
 }
 
-function getDataForAttachment(enquiryId) {
-    var fd = new FormData(); 
-    var files = $('#Permit')[0].files[0]; 
-    fd.append('file', files); 
+function getDataForAttachment(enquiryId, file) {
     var json = {};
-    var date = "/Date(" + Date.now() + ")/";
     json["DOCID"] = ""
     json["LINKID"] = enquiryId
     json["DOCUCAT_CATEGORY"] = "A1"
-    json["TYPE"] = files.type
+    json["TYPE"] = file.type
     json["TITLE"] = "Document for " + enquiryId
-    json["CREATEDAT"] = date
+    json["CREATEDAT"] = "1996-01-02 00:00:00"
     json["DESCRIPTION"] = "Document Description"
-    json["SIZE"] = files.size.toString()
+    json["SIZE"] = file.size.toString()
     console.log(json);
-    return JSON.stringify(json)
+    return json
 }
 
 
@@ -137,6 +156,7 @@ function ConvertFormToJSON(form) {
     delete json["PICKUP.LOCATION"]
     delete json["PICKUP.DATE"]
     delete json["DROPOFF.DATE"]
+    delete json["fileContent"]
     console.log(json);
     console.log(JSON.stringify(json));
     return JSON.stringify(json);
@@ -171,13 +191,48 @@ function sendEnquiry() {
         "url": proxy + "https://audb01c77f3e83a.ap1.hana.ondemand.com/pilot/xsodata/pilot.xsodata/Enquiry",
         "method": "POST",
         "headers": headers,
-        success: function (msg) {
-            console.log(msg);
-            // alert("Your enquiry has been recieved and your customer id is " + msg.d.JOBHID)
-            // set content
-            modal.setContent('<h4>Your enquiry has been submitted.</h4><p>Your JOB-ID is ' + msg.d.JOBHID + ' </p>');
-            //open modal
-            modal.open();
+        success: function (enquiryMsg) {
+            var payload = {};
+            var file = {};
+            var uploadedFile = $('#Permit')[0].files[0];
+            if (uploadedFile != undefined) {
+                file["file"] = $("#fileContent").val()
+                payload["data"] = JSON.stringify(getDataForAttachment(enquiryMsg.d.JOBHID, uploadedFile));
+                payload["file"] = JSON.stringify(file)
+                console.log(payload)
+                $.ajax({
+                    "async": true,
+                    "crossDomain": true,
+                    "url": "https://audb01c77f3e83a.ap1.hana.ondemand.com/pilot/xsodata/attachment.xsjs?post=insert",
+                    "method": "POST",
+                    "headers": {
+                        "Accept": "application/json",
+                        "Content-Type": "application/x-www-form-urlencoded",
+                        "Authorization": "Basic U1lTVEVNOklua2l0c2NwQGF1ZGIwNA==",
+                        "Cache-Control": "no-cache",
+                        "cache-control": "no-cache"
+                    },
+                    success: function (msg) {
+                        // alert("Your enquiry has been recieved and your customer id is " + msg.d.JOBHID)
+                        // set content
+                        modal.setContent('<h4>Your enquiry has been submitted.</h4><p>Your JOB-ID is ' + enquiryMsg.d.JOBHID + ' </p>');
+                        //open modal
+                        modal.open();
+                    },
+                    error: function (err) {
+                        alert("fail");
+                    },
+                    "data": payload
+                }).done(function (response) {
+                    console.log(response);
+                });
+            } else {
+                // alert("Your enquiry has been recieved and your customer id is " + msg.d.JOBHID)
+                // set content
+                modal.setContent('<h4>Your enquiry has been submitted.</h4><p>Your JOB-ID is ' + enquiryMsg.d.JOBHID + ' </p>');
+                //open modal
+                modal.open();
+            }
         },
         error: function (err) {
             alert("fail");
